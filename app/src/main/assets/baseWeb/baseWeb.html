@@ -1,0 +1,33 @@
+<html>
+    <head>
+            <script type="text/javascript">
+                function actionFromNative(){
+                    document.getElementById("log_msg").innerHTML += "<br\>Android调用了js函数";
+                    alert("js无参响应了");
+                }
+
+                function actionFromNativeWithParam(arg){
+                    document.getElementById("log_msg").innerHTML += ("<br\>Android调用了js函数并传递参数：" + arg);
+                    alert("js有参函数响应了");
+                }
+            </script>
+    </head>
+    <body>
+        <p>WebView与Javascript交互</p>
+        <div>
+            <button onclick="window.baseWeb.textShow()">点击显示默认字符串</button>
+            <!--<button value="lalala" onclick="window.baseWeb.textShow()"/>-->
+            <!--<input type="button" value="lalalallalal" onclick="window.baseWeb.textShow()"/>-->
+        </div>
+
+        <br/>
+
+        <div>
+            <button onclick="window.baseWeb.textShow('这是HTML要告诉我的消息')">点击显示。。。</button>
+        </div>
+
+        <br/>
+
+        <div id="log_msg">调用打印信息</div>
+    </body>
+</html>

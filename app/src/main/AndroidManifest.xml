@@ -1,0 +1,314 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="testapp.android.com.echartslearn">
+
+    <!-- Required -->
+    <permission
+        android:name="${applicationId}.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <!-- Required  一些系统要求的权限，如访问网络等-->
+    <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+
+    <permission android:name="android.permission.WRITE_SETTINGS" />
+    <permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /><!-- Android Q后台定位权限-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!--<uses-permission android:name="android.permission.GET_TASKS" />-->
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!--网易即时通讯-->
+    <!-- 权限声明 -->
+    <!-- 访问网络状态-->
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 外置存储存取权限 -->
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
+
+    <!-- 多媒体相关 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
+    <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
+    <!-- 和下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
+    <permission
+        android:name="testapp.android.com.echartslearn.permission.RECEIVE_MSG"
+        android:protectionLevel="signature" />
+    <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
+    <uses-permission android:name="testapp.android.com.echartslearn.permission.RECEIVE_MSG" />
+
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+
+    <!-- Android8.0启动安装程序的 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+
+    <application
+        android:name=".application.MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".echartline.EchartLineActivity" />
+        <activity android:name=".html.HtmlActivity" />
+        <activity android:name=".html.Html2Activity" />
+
+        <activity android:name=".androidtemplate.MainActivity" />
+        <activity android:name=".androidtemplate.BaiduActivity" />
+        <activity android:name=".androidtemplate.js.JSTestActivity" />
+        <activity android:name=".androidtemplate.EChartLocalInterfaceActivity" />
+        <activity
+            android:name=".view_show.sliding.SlidingActivity"
+            android:theme="@style/AppBaseTheme" />
+        <activity
+            android:name=".view_show.text.VariableHeightActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".reflect.ReflectActivity" />
+        <activity android:name=".media_player.vedio.video_list.SearchAndShowVedioActivity" />
+        <activity android:name=".base_webview.BaseWebViewActivity" />
+        <activity android:name=".array.ArrayActivity" />
+        <activity android:name=".wait.WatiActivity" />
+        <activity android:name=".view_show.onlayout.OnLayoutActivity" />
+        <activity android:name=".view_show.text.SpannerTextActivity" />
+        <activity android:name=".dateSelect.DateSelectActivity" />
+        <activity android:name=".view_show.zoom_view.ZoomViewActivity" />
+        <activity android:name=".view_show.suspend.SuspendActivity" />
+        <activity android:name=".shade.ShadeActivity" />
+        <activity android:name=".view_show.text.TestTypefaceActivity" />
+        <activity android:name=".base_fragment.BaseFragmentActivity" />
+        <activity android:name=".choice_range.DoubleSlideSeekBarActivity" />
+        <activity android:name=".regular.RegularTestActivity" />
+        <activity android:name=".view_show.pager_page.ViewPagerActivity" />
+        <activity android:name=".media_player.music.DanikulaPlayActivity" />
+        <activity
+            android:name=".view_show.sliding.suspend_sliding.SuspendSlidingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".push.push_jiguang.JiGuangPushActivity" />
+        <activity android:name=".certification.CertificationActivity" />
+        <activity android:name=".show_app.ShowAPPActivity" />
+        <activity
+            android:name=".coordinator.CoordinatorActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".media_player.vedio.video_press.PressVideoActivity" />
+        <activity android:name=".third_recycler.ThirdFragmentOfListActivity" />
+        <activity android:name=".bundle_intent.PageAgoActivity" />
+        <activity android:name=".bundle_intent.PageAfterActivity" />
+        <activity android:name=".marquee.MarqueeActivity" />
+        <activity android:name=".view_show.popup.ShowPopupActivity"/>
+
+        <activity android:name=".im.NeteaseIMActivity" />
+        <activity android:name=".call_phone.CallPhoneActivity" />
+        <activity android:name=".notify.NotifyActivity" />
+        <activity android:name=".view_show.image.ImageShowActivity" />
+        <activity android:name=".view_show.AlignTextActivity"/>
+        <activity android:name=".permission.PermissionActivity"/>
+
+        <service android:name=".certification.NotifyService" />
+
+        <!--网易即时通讯-->
+        <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
+            如果 SDKOptions 中提供了，取 SDKOptions 中的值。 -->
+        <meta-data
+            android:name="com.netease.nim.appKey"
+            android:value="cbee67a21d25e28fec007933399a571a" />
+
+        <!-- 云信后台服务，请使用独立进程。 -->
+        <service
+            android:name="com.netease.nimlib.service.NimService"
+            android:process=":core" />
+
+        <!-- 云信后台辅助服务 -->
+        <service
+            android:name="com.netease.nimlib.service.NimService$Aux"
+            android:process=":core" />
+
+        <!-- 云信后台辅助服务 -->
+        <service
+            android:name="com.netease.nimlib.job.NIMJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":core" />
+
+        <!-- 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 -->
+        <receiver
+            android:name="com.netease.nimlib.service.NimReceiver"
+            android:exported="false"
+            android:process=":core">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 云信进程间通信 Receiver -->
+        <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
+
+        <!-- 云信进程间通信service -->
+        <service android:name="com.netease.nimlib.service.ResponseService" />
+
+        <!-- 云信进程间通信provider -->
+        <!-- android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 -->
+        <provider
+            android:name="com.netease.nimlib.ipc.NIMContentProvider"
+            android:authorities="testapp.android.com.echartslearn.ipc.provider"
+            android:exported="false"
+            android:process=":core" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="testapp.android.com.echartslearn.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+
+        <!-- Required SDK核心功能-->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </activity>
+
+        <!-- Since JCore2.0.0 Required SDK核心功能-->
+        <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
+        <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
+        <service
+            android:name=".push.push_jiguang.JiGuangPushService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK 核心功能-->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- since 3.1.0 Required SDK 核心功能-->
+        <provider
+            android:name="cn.jpush.android.service.DownloadProvider"
+            android:authorities="${applicationId}.DownloadProvider"
+            android:exported="true"
+            tools:replace="android:authorities" />
+
+        <!-- since 3.0.9 Required SDK 核心功能-->
+        <provider
+            android:name="cn.jpush.android.service.DataProvider"
+            android:authorities="${applicationId}.DataProvider"
+            android:exported="false"
+            android:process=":pushcore"
+            tools:replace="android:authorities" />
+
+        <!-- Required since 3.0.7 -->
+        <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定的广播 -->
+        <!-- 3.3.0开始所有事件将通过该类回调 -->
+        <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
+        <receiver
+            android:name=".push.push_jiguang.JiGuangPushMessageReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能-->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
+                <category android:name="${applicationId}" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能-->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
+
+        <!--since 3.3.0 Required SDK核心功能-->
+        <activity
+            android:name="cn.jpush.android.service.JNotifyActivity"
+            android:exported="true"
+            android:taskAffinity="jpush.custom"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.JNotifyActivity" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </activity>
+
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="${JPUSH_CHANNEL}" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="${JPUSH_APPKEY}" /> <!--  </>值来自开发者平台取得的AppKey-->
+
+    </application>
+</manifest>

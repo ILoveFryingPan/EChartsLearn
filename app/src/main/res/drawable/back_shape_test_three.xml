@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:left="100dp">
+        <!--<animated-rotate android:drawable="@drawable/back_shade_test_two" android:pivotX="50dp" android:pivotY="50dp" android:visible="false"/>-->
+        <!--<clip android:drawable="@drawable/back_shade_test_one" android:gravity="end" android:clipOrientation="vertical" />-->
+        <shape android:shape="rectangle">
+            <gradient android:type="linear"
+                android:gradientRadius="@dimen/dip_100"
+                android:startColor="#ffff0000"
+                android:endColor="#ff00ff00"/>
+            <corners android:radius="@dimen/dip_20"/>
+        </shape>
+        <!--<layer-list>-->
+            <!--<item>-->
+                <!--<shape>-->
+                    <!--<solid android:color="#ff000000"/>-->
+                <!--</shape>-->
+            <!--</item>-->
+        <!--</layer-list>-->
+        <!--<color android:color="#ff000000"/>-->
+    </item>
+</layer-list>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testapp.android.com.echartslearn.view_show.onlayout.TopLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/the_text"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:textSize="30sp"
+        android:text="abcdefgjsdjfskdjkdljflksjdfklsjflkdsjflsdjflfjlsdjfklsjflsfjklfjdfsjlkflksdjflsjflksdjfdlsfjsldkjskjfl"
+        android:lineSpacingExtra="45dp"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:layout_toLeftOf="@id/the_text"
+        android:textSize="40sp"
+        android:text="这是左侧的文字，这是左侧的文字， 这是左侧的文字，这是左侧的文字"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:layout_toRightOf="@id/the_text"
+        android:textSize="40sp"
+        android:text="这是右侧的文字，这是右侧的文字， 这是右侧的文字，这是右侧的文字"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:layout_above="@id/the_text"
+        android:textSize="40sp"
+        android:gravity="bottom"
+        android:text="这是上侧的文字，这是上侧的文字， 这是上侧的文字，这是上侧的文字"/>
+</testapp.android.com.echartslearn.view_show.onlayout.TopLinearLayout>

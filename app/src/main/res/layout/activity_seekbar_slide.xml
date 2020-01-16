@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <testapp.android.com.echartslearn.choice_range.DoubleSlideSeekBar
+        android:id="@+id/doubleslide_withoutrule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_50"
+        custom:bigValue="1000"
+        custom:hasRule="false"
+        custom:imageBig="@mipmap/ic_launcher"
+        custom:imageLow="@mipmap/ic_launcher"
+        custom:imageheight="50dp"
+        custom:imagewidth="50dp"
+        custom:inColor="#0a40f1"
+        custom:lineHeight="20dp"
+        custom:outColor="#ace208"
+        custom:smallValue="50"
+        custom:textColor="#e40627"
+        custom:textSize="0sp"/>
+
+</LinearLayout>

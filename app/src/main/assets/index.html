@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Android/Javascript互调Demo</title>
+    <script type="text/javascript" language="javascript">
+            function  callJavaScriptMethod()
+            {
+                <!--document.getElementById("content").innerHTML = "Android 调用 Javascript 成功";-->
+                var ifr = document.createElement('iframe');
+                ifr.src = 'intent:com.jiaheng.fangxiaoer_public://splash/open#Intent;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;end';
+                ifr.style.display = 'none';
+                document.body.appendChild(ifr);
+
+                window.setTimeout(function(){
+                    document.body.removeChild(ifr);
+                },3000)
+            }
+    </script>
+</head>
+
+<body bgcolor="#999999">
+<div><a onClick="window.index.callJavaMethod()" href="www.baidu.com">点击-->JS调用Android代码</a></div>
+
+<br/>
+<br/>
+<br/>
+
+<a href="intent:com.jiaheng.fangxiaoer_public://splash/open#Intent;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;end">打开app</a><br/>
+
+<br/>
+<br/>
+<br/>
+
+<div style="margin:50px 50px 50px 50px;" id="content"></div>
+
+<br/>
+<br/>
+<div style="background:#ffff00;">
+    <span style="vertical-align:middle;text-align:center">
+    <font color="#00ffff" size="2">我爱平底锅</font>
+    <font size="6" style="background:#0000ff;">我爱背景天安门</font>
+    <span style="background:#00ff00;">我爱平底锅</span>
+    </span>
+</div>
+</body>
+</html>

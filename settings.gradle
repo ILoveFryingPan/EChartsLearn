@@ -1,0 +1,6 @@
+include ':library', ':rootlibrary', ':filtertab', ':filtertabviewapp'
+include ':app'
+include ':toastlibrary'
+
+//include 'androidslidingup'
+//project(':androidslidingup').projectDir = new File(settingsDir, '../library/')

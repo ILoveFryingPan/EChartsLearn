@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_100">
+        <TextView
+            android:id="@+id/rl_left_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="70sp"
+            android:text="我爱北京"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/rl_left_text"
+            android:layout_toRightOf="@id/rl_left_text"
+            android:textColor="#00ffff"
+            android:textSize="14sp"
+            android:text="天安门"
+            android:layout_alignBaseline="@id/rl_left_text"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_100"
+        android:layout_marginTop="@dimen/dip_50"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#00ffff"
+            android:textSize="14sp"
+            android:text="天安门"/>
+        <TextView
+            android:id="@+id/ll_left_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="70sp"
+            android:text="我爱北京"/>
+    </LinearLayout>
+</LinearLayout>
