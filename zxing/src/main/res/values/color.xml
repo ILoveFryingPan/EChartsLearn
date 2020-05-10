@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffF5F5F5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="xiaoer_red">#ff5200</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="color_ff6f28">#ff6f28</color>
+</resources>

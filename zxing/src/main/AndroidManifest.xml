@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.zxing" >
+    <application>
+        <activity
+            android:name=".qrcode.CaptureActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".qrcode.HelloWorldActivity"/>
+        <activity android:name=".qrcode.AuthorizationLoginActivity"/>
+    </application>
+</manifest>
