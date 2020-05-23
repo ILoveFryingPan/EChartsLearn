@@ -62,5 +62,7 @@
     <item name="show_popup" type="id"/>
     <item name="filter_app" type="id"/>
     <item name="permission_helper" type="id"/>
+    <item name="swift_list" type="id"/>
+    <item name="camera_launch_mode" type="id"/>
 
 </resources>

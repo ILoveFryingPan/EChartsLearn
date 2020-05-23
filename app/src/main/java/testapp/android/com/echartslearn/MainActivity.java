@@ -30,6 +30,7 @@ import testapp.android.com.echartslearn.array.ArrayActivity;
 import testapp.android.com.echartslearn.base_fragment.BaseFragmentActivity;
 import testapp.android.com.echartslearn.base_webview.BaseWebViewActivity;
 import testapp.android.com.echartslearn.bundle_intent.PageAgoActivity;
+import testapp.android.com.echartslearn.camera.LaunchModeCameraActivity;
 import testapp.android.com.echartslearn.certification.CertificationActivity;
 import testapp.android.com.echartslearn.choice_range.DoubleSlideSeekBarActivity;
 import testapp.android.com.echartslearn.coordinator.CoordinatorActivity;
@@ -43,6 +44,7 @@ import testapp.android.com.echartslearn.media_player.music.DanikulaPlayActivity;
 import testapp.android.com.echartslearn.media_player.vedio.video_press.PressVideoActivity;
 import testapp.android.com.echartslearn.notify.NotifyActivity;
 import testapp.android.com.echartslearn.permission.PermissionActivity;
+import testapp.android.com.echartslearn.swift_list.SwiftListActivity;
 import testapp.android.com.echartslearn.view_show.onlayout.OnLayoutActivity;
 import testapp.android.com.echartslearn.view_show.pager_page.ViewPagerActivity;
 import testapp.android.com.echartslearn.push.push_jiguang.JiGuangPushActivity;
@@ -79,8 +81,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BigDecimal b = new BigDecimal(String.valueOf(f));
         double f1 = b.setScale(3, BigDecimal.ROUND_HALF_UP).doubleValue();
 
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
-//                , Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
+                , Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,}, 100);
 
         ScrollView scrollView = new ScrollView(this);
         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -134,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createButton(R.id.show_popup, "show_popup");
         createButton(R.id.filter_app, "filter_app");
         createButton(R.id.permission_helper, "permission_helper");
+        createButton(R.id.swift_list, "swift_list");
+        createButton(R.id.camera_launch_mode, "camera_launch_mode");
 
         testMethod();
     }
@@ -284,6 +290,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.permission_helper:
                 startActivity(new Intent(this, PermissionActivity.class));
+                break;
+            case R.id.swift_list:
+                startActivity(new Intent(this, SwiftListActivity.class));
+                break;
+            case R.id.camera_launch_mode:
+                startActivity(new Intent(this, LaunchModeCameraActivity.class));
                 break;
         }
     }

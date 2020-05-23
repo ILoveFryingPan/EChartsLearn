@@ -14,7 +14,9 @@ package testapp.android.com.echartslearn;
 
 public class LineTest5 {
 
-//    public void test() {
+    public void test() {
+        String test = "我爱北京天安门";
+//        test.lastIndexOf()
 //        //地址:http://echarts.baidu.com/doc/example/line5.html
 //
 //        Option option = new Option();
@@ -48,6 +50,6 @@ public class LineTest5 {
 //        option.series(line);
 ////        option.exportToHtml("line5.html");
 ////        option.view();
-//    }
+    }
 
 }

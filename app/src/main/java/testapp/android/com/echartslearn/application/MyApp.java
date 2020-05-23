@@ -3,6 +3,7 @@ package testapp.android.com.echartslearn.application;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.StrictMode;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -65,6 +66,11 @@ public class MyApp extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        // android 7.0系统解决拍照的问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
+
         // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将完成自动登录）
         NIMClient.init(this, loginInfo(), options());
 

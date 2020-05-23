@@ -130,6 +130,9 @@
         <activity android:name=".view_show.image.ImageShowActivity" />
         <activity android:name=".view_show.AlignTextActivity"/>
         <activity android:name=".permission.PermissionActivity"/>
+        <activity android:name=".swift_list.SwiftListActivity"/>
+        <activity android:name=".camera.LaunchModeCameraActivity"/>
+        <activity android:name=".camera.CustomerCameraActivity"/>
 
         <service android:name=".certification.NotifyService" />
 
