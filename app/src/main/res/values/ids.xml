@@ -64,5 +64,7 @@
     <item name="permission_helper" type="id"/>
     <item name="swift_list" type="id"/>
     <item name="camera_launch_mode" type="id"/>
+    <item name="custom_top_layout" type="id"/>
+    <item name="custom_bottom_layout" type="id"/>
 
 </resources>
