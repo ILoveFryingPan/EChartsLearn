@@ -31,6 +31,7 @@ allprojects {
         maven {
             url "https://maven.aliyun.com/nexus/content/repositories/releases"
         }
+        maven { url 'https://jitpack.io' }
         maven {
             url "https://maven.google.com"
         }
@@ -50,3 +51,16 @@ task wrapper(type: Wrapper) {
     gradleVersion = '3.3'
     distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
+
+ext{
+    ANDROID_SUPPORT_VERSION='27.0.3'
+}
+
+//configurations.all {
+//    resolutionStrategy {
+//        force "com.android.support:support-v4:${ANDROID_SUPPORT_VERSION}"
+//        force "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
+//        force "com.android.support:design:${ANDROID_SUPPORT_VERSION}"
+//        force "com.android.support:recyclerview-v7:${ANDROID_SUPPORT_VERSION}"
+//    }
+//}

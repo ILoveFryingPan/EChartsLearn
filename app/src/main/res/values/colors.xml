@@ -6,5 +6,11 @@
 
     <color name="v4_theme_filter_color">#FF5200</color>
 
+    <color name="color_ff6f28">#ff6f28</color>
+    <color name="color_545454">#545454</color>
+    <color name="color_e0e0e0">#e0e0e0</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_f7f7f7">#f7f7f7</color>
+
 
 </resources>

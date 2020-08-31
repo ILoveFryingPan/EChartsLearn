@@ -53,6 +53,7 @@ import testapp.android.com.echartslearn.regular.RegularTestActivity;
 import testapp.android.com.echartslearn.shade.ShadeActivity;
 import testapp.android.com.echartslearn.show_app.ShowAPPActivity;
 import testapp.android.com.echartslearn.view_show.popup.ShowPopupActivity;
+import testapp.android.com.echartslearn.view_show.progress.ProgressBarActivity;
 import testapp.android.com.echartslearn.view_show.sliding.SlidingActivity;
 import testapp.android.com.echartslearn.view_show.sliding.suspend_sliding.SuspendSlidingActivity;
 import testapp.android.com.echartslearn.view_show.suspend.SuspendActivity;
@@ -140,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createButton(R.id.permission_helper, "permission_helper");
         createButton(R.id.swift_list, "swift_list");
         createButton(R.id.camera_launch_mode, "camera_launch_mode");
+        createButton(R.id.custom_progressbar_learn, "custom_progressBar_learn");
 
         testMethod();
     }
@@ -296,6 +298,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.camera_launch_mode:
                 startActivity(new Intent(this, LaunchModeCameraActivity.class));
+                break;
+            case R.id.custom_progressbar_learn:
+                startActivity(new Intent(this, ProgressBarActivity.class));
                 break;
         }
     }

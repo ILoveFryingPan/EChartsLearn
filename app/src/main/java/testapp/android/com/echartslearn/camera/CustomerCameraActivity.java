@@ -1,5 +1,6 @@
 package testapp.android.com.echartslearn.camera;
 
+import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -9,9 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.hjq.toast.ToastUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,12 +39,14 @@ public class CustomerCameraActivity extends AppCompatActivity implements View.On
 
     private int cameraId;
     private Camera camera;
+    private RelativeLayout rootLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
         setContentView(createView());
+        initData2();
     }
 
     private void initData() {
@@ -48,11 +55,30 @@ public class CustomerCameraActivity extends AppCompatActivity implements View.On
         dip100 = (int) getResources().getDimension(R.dimen.dip_100);
     }
 
+    private void initData2() {
+        rootLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                rootLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                //预览的大小是多少
+                Camera.Size size = camera.getParameters().getPreviewSize();
+                setCameraPreviewSize(preview.getWidth(), preview.getHeight(), size.width, size.height);
+            }
+        });
+    }
+
     private View createView() {
-        RelativeLayout rootLayout = new RelativeLayout(this);
+        rootLayout = new RelativeLayout(this);
         rootLayout.setBackgroundColor(0xffffffff);
         ViewGroup.LayoutParams rootLP = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         rootLayout.setLayoutParams(rootLP);
+
+        preview = new CameraPreview(this);
+        RelativeLayout.LayoutParams previewLP = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        previewLP.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+//        previewLP.addRule(RelativeLayout.ABOVE, bottomLayout.getId());
+//        previewLP.addRule(RelativeLayout.BELOW, topLayout.getId());
+        rootLayout.addView(preview, previewLP);
 
         RelativeLayout topLayout = new RelativeLayout(this);
         topLayout.setBackgroundColor(0xffffffff);
@@ -63,6 +89,7 @@ public class CustomerCameraActivity extends AppCompatActivity implements View.On
         lightImage = new ImageView(this);
         lightImage.setImageResource(R.mipmap.one);
         lightImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        lightImage.setOnClickListener(this);
         RelativeLayout.LayoutParams lightImageLP = new RelativeLayout.LayoutParams(dip50, dip50);
         lightImageLP.leftMargin = dip15;
         topLayout.addView(lightImage, lightImageLP);
@@ -78,7 +105,8 @@ public class CustomerCameraActivity extends AppCompatActivity implements View.On
 
         RelativeLayout bottomLayout = new RelativeLayout(this);
         bottomLayout.setId(R.id.custom_bottom_layout);
-        RelativeLayout.LayoutParams bottomLayoutLP = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip100);
+        bottomLayout.setBackgroundColor(0xffffffff);
+        RelativeLayout.LayoutParams bottomLayoutLP = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip50);
         bottomLayoutLP.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         rootLayout.addView(bottomLayout, bottomLayoutLP);
 
@@ -104,12 +132,6 @@ public class CustomerCameraActivity extends AppCompatActivity implements View.On
         shootImageLP.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         bottomLayout.addView(shootImage, shootImageLP);
 
-        preview = new CameraPreview(this);
-        RelativeLayout.LayoutParams previewLP = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        previewLP.addRule(RelativeLayout.ABOVE, bottomLayout.getId());
-        previewLP.addRule(RelativeLayout.BELOW, topLayout.getId());
-        rootLayout.addView(preview, previewLP);
-
         return rootLayout;
     }
 
@@ -121,16 +143,20 @@ public class CustomerCameraActivity extends AppCompatActivity implements View.On
 
     private void createCamera(int cameraId) {
         stopCamera();
-        this.cameraId = cameraId;
-        camera = Camera.open(cameraId);
-        preview.setmCamera(camera);
+        try {
+            camera = Camera.open(cameraId);
+            preview.setmCamera(camera);
+            this.cameraId = cameraId;
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            ToastUtils.getToast().setDuration(Toast.LENGTH_LONG);
+            ToastUtils.show("相机正在使用中，无法使用该功能");
+        }
 
         //得到照相机的参数
         Camera.Parameters parameters = camera.getParameters();
         //图片的格式
         parameters.setPictureFormat(ImageFormat.JPEG);
-        //预览的大小是多少
-        parameters.setPreviewSize(800, 400);
         //设置对焦模式，自动对焦
         parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
     }
@@ -139,10 +165,24 @@ public class CustomerCameraActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         if (v.equals(lightImage)) {
             //是否开启闪光灯
+            if (null != camera) {
+                Camera.Parameters parameters = camera.getParameters();
+                String flashMode = parameters.getFlashMode();
+                if (Camera.Parameters.FLASH_MODE_TORCH.equals(flashMode)) {
+                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+                } else {
+                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                }
+                camera.setParameters(parameters);
+//                camera.release();     这行代码不能用，闪退
+            }
         } else if (v.equals(cameraTypeImage)) {
             //选择前置摄像头还是后置摄像头
             int id = cameraId ^ 1;
             createCamera(id);
+            //预览的大小是多少
+            Camera.Size size = camera.getParameters().getPreviewSize();
+            setCameraPreviewSize(preview.getWidth(), preview.getHeight(), size.width, size.height);
         } else if (v.equals(cancel)) {
             //取消
             finish();
@@ -197,5 +237,29 @@ public class CustomerCameraActivity extends AppCompatActivity implements View.On
             camera.release();
             camera = null;
         }
+    }
+
+    public void setCameraPreviewSize(int viewWidth, int viewHeight, int cameraWidth, int cameraHeight) {
+        boolean bIsPortrait = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT);    // 判断水平/垂直状态
+
+        if (bIsPortrait) {
+            int tmp = cameraWidth;
+            cameraWidth = cameraHeight;
+            cameraHeight = tmp;
+        }
+
+        int destWidth = viewWidth;
+        int destHeight = viewHeight;
+
+        if (bIsPortrait) {
+            destHeight = (int)(((double)cameraHeight / cameraWidth) * destWidth);
+        } else {
+            destWidth = (int)(((double)cameraWidth / cameraHeight) * destHeight);
+        }
+
+        RelativeLayout.LayoutParams preViewLP = (RelativeLayout.LayoutParams) preview.getLayoutParams();
+        preViewLP.width = destWidth;
+        preViewLP.height = destHeight;
+        preview.setLayoutParams(preViewLP);
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ProgressBar
+        android:id="@+id/first_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dip_50"
+        android:minWidth="@dimen/dip_100"
+        android:maxWidth="@dimen/dip_100"
+        android:minHeight="@dimen/dip_100"
+        android:maxHeight="@dimen/dip_100"
+        android:max="100"
+        android:progress="30"
+        android:rotation="180"
+        android:indeterminateOnly="false"
+        android:progressDrawable="@drawable/progressbar_style_test_one"/>
+
+    <ProgressBar
+        android:id="@+id/second_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:minWidth="@dimen/dip_100"
+        android:maxWidth="@dimen/dip_100"
+        android:minHeight="@dimen/dip_100"
+        android:maxHeight="@dimen/dip_100"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@drawable/progressbar_style_test_one"
+        android:indeterminateOnly="false"/>
+
+    <testapp.android.com.echartslearn.view_show.progress.RoundProgressBar
+        android:id="@+id/roundProgressBar04_id"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        app:isRoundGradient="true"
+        app:roundColor="#92ffffff"
+        app:roundColorEnd="#fc5107"
+        app:roundColorCenter="#fc6d07"
+        app:roundColorStart="#ff6f28"
+        app:roundWidth="@dimen/dip_2"
+        app:roundProgressColor="#CD3333"
+        app:textIsDisplayable="false"/>
+</RelativeLayout>

@@ -132,7 +132,9 @@
         <activity android:name=".permission.PermissionActivity"/>
         <activity android:name=".swift_list.SwiftListActivity"/>
         <activity android:name=".camera.LaunchModeCameraActivity"/>
-        <activity android:name=".camera.CustomerCameraActivity"/>
+        <activity android:name=".camera.CustomerCameraActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".view_show.progress.ProgressBarActivity"/>
 
         <service android:name=".certification.NotifyService" />
 

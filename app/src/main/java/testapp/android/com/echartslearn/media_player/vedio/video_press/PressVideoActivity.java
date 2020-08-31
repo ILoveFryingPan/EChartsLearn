@@ -25,6 +25,12 @@ import com.alibaba.sdk.android.vod.upload.VODUploadClientImpl;
 import com.alibaba.sdk.android.vod.upload.model.UploadFileInfo;
 import com.alibaba.sdk.android.vod.upload.model.VodInfo;
 import com.iceteck.silicompressorr.SiliCompressor;
+import com.mabeijianxi.smallvideorecord2.DeviceUtils;
+import com.mabeijianxi.smallvideorecord2.JianXiCamera;
+import com.mabeijianxi.smallvideorecord2.LocalMediaCompress;
+import com.mabeijianxi.smallvideorecord2.model.AutoVBRMode;
+import com.mabeijianxi.smallvideorecord2.model.LocalMediaConfig;
+import com.mabeijianxi.smallvideorecord2.model.OnlyCompressOverBean;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -53,6 +59,7 @@ public class PressVideoActivity extends AppCompatActivity implements View.OnClic
     private TextView pressText;
     private TextView pushVideo;
     private ProgressBar progressBar;
+    private TextView pressPath;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,6 +129,16 @@ public class PressVideoActivity extends AppCompatActivity implements View.OnClic
         showLP.topMargin = dip10;
         root.addView(showMsg, showLP);
 
+        pressPath = new TextView(this);
+        pressPath.setTextSize(15);
+        pressPath.setTextColor(0xffff00ff);
+        pressPath.setBackgroundColor(0xffffffff);
+        pressPath.setText("压缩后视频输出目录：");
+        pressPath.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams pressPathLP = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip50);
+        pressPathLP.topMargin = dip10;
+        root.addView(pressPath, pressPathLP);
+
         pressText = new TextView(this);
         pressText.setText("视频压缩");
         pressText.setTextSize(15);
@@ -167,6 +184,19 @@ public class PressVideoActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    public static void initSmallVideo() {
+        // 设置拍摄视频缓存路径
+        String outPutPath = Environment.getExternalStorageDirectory().getPath();
+        outPutPath = outPutPath + File.separator + "pressCache" + File.separator;
+        File mfile = new File(outPutPath);
+        if (!mfile.exists()) {
+            mfile.mkdirs();
+        }
+            JianXiCamera.setVideoCachePath(outPutPath);
+        // 初始化拍摄，遇到问题可选择开启此标记，以方便生成日志
+        JianXiCamera.initialize(false,null);
+    }
+
     @Override
     public void onClick(View v) {
         if (v.equals(selectVideo)) {
@@ -176,40 +206,61 @@ public class PressVideoActivity extends AppCompatActivity implements View.OnClic
                 Toast.makeText(this, "视频路径无效", Toast.LENGTH_SHORT).show();
                 return;
             }
-
+            initSmallVideo();
             progressBar.setVisibility(View.VISIBLE);
 
             // TODO: 2019/9/12 视频压缩的点击事件
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try {
-                        MediaMetadataRetriever retr = new MediaMetadataRetriever();
-                        retr.setDataSource(path);
-                        String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT); // 视频高度
-                        String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH); // 视频宽度
-                        String rotation = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION); // 视频旋转方向
-                        int outWidth = Integer.parseInt(width);
-                        int outHeight = Integer.parseInt(height);
-                        if (outWidth % 2 != 0) {
-                            outWidth--;
-                        }
-                        if (outHeight % 2 != 0) {
-                            outHeight--;
-                        }
+                    // 选择本地视频压缩
+                    Log.d("PressVideoActivity", "视频压缩开始：" + System.currentTimeMillis());
+                    LocalMediaConfig.Buidler buidler = new LocalMediaConfig.Buidler();
+                    LocalMediaConfig config = buidler
+                            .setVideoPath(path)
+                            .captureThumbnailsTime(1)
+                            .doH264Compress(new AutoVBRMode())
+                            .setFramerate(15)
+                            .setScale(1.0f)
+                            .build();
+                    OnlyCompressOverBean onlyCompressOverBean = new LocalMediaCompress(config).startCompress();
+                    onlyCompressOverBean.getVideoPath();
 
-                        filePath = SiliCompressor.with(PressVideoActivity.this).compressVideo(path, outPath, outWidth, outHeight, 0);
-                        Message message = handler.obtainMessage();
-                        if (null == message) {
-                            message = new Message();
-                        }
-                        message.what = 50;
-                        message.obj = filePath;
-                        handler.sendMessage(message);
-//                showMsg.setText("压缩后视频路径：" + filePath);
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
+                    Message message = handler.obtainMessage();
+                    if (null == message) {
+                        message = new Message();
                     }
+                    message.what = 50;
+                    message.obj = onlyCompressOverBean.getVideoPath();
+                    handler.sendMessage(message);
+                    Log.d("PressVideoActivity", "视频压缩结束：" + System.currentTimeMillis());
+//                    try {
+//                        MediaMetadataRetriever retr = new MediaMetadataRetriever();
+//                        retr.setDataSource(path);
+//                        String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT); // 视频高度
+//                        String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH); // 视频宽度
+//                        String rotation = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION); // 视频旋转方向
+//                        int outWidth = Integer.parseInt(width);
+//                        int outHeight = Integer.parseInt(height);
+//                        if (outWidth % 2 != 0) {
+//                            outWidth--;
+//                        }
+//                        if (outHeight % 2 != 0) {
+//                            outHeight--;
+//                        }
+//
+//                        filePath = SiliCompressor.with(PressVideoActivity.this).compressVideo(path, outPath, outWidth, outHeight, 0);
+//                        Message message = handler.obtainMessage();
+//                        if (null == message) {
+//                            message = new Message();
+//                        }
+//                        message.what = 50;
+//                        message.obj = filePath;
+//                        handler.sendMessage(message);
+////                showMsg.setText("压缩后视频路径：" + filePath);
+//                    } catch (URISyntaxException e) {
+//                        e.printStackTrace();
+//                    }
                 }
             }).start();
         } else if (v.equals(pushVideo)) {
@@ -228,9 +279,9 @@ public class PressVideoActivity extends AppCompatActivity implements View.OnClic
                 case 50:
                     filePath = (String) msg.obj;
                     if (!TextUtils.isEmpty(filePath)) {
-                        showMsg.setText("压缩后视频路径：" + filePath);
+                        pressPath.setText("压缩后视频路径：" + filePath);
                     } else {
-                        showMsg.setText("压缩失败");
+                        pressPath.setText("压缩失败");
                     }
                     progressBar.setVisibility(View.GONE);
                     break;

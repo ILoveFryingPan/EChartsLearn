@@ -131,6 +131,8 @@
     <dimen name="dip_120">120dp</dimen>
     <dimen name="dip_121">121dp</dimen>
     <dimen name="dip_134">134dp</dimen>
+    <dimen name="dip_150">150dp</dimen>
+    <dimen name="dip_158">158dp</dimen>
     <dimen name="dip_195">195dp</dimen>
     <dimen name="dip_200">200dp</dimen>
     <dimen name="dip_205">205dp</dimen>
